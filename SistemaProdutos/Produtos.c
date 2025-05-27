@@ -13,7 +13,14 @@ struct Item{
 struct ListaCompras{
     float valorTotal;
     int capacidadeEstoque;
+    struct Item *p;
 };
+
+void inicializarLista(struct ListaCompras *lista){
+    lista->p = NULL;
+    lista->capacidadeEstoque = 0;
+    lista->valorTotal = 0.0;
+}
 
 int main(void){
 
