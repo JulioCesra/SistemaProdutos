@@ -61,8 +61,16 @@ int removerItem(struct ListaCompras *lista,int idRemover){
         }
     }
 
+    if(index == -1){
+        printf("ITEM NAO ENCONTRADO\n");
+        return 1;
+    }
+
     lista->valorTotal -= lista->p[index].quantidade * lista->p[index].valorUnitario;
-    lista->p = realloc(lista->p, (lista->capacidadeEstoque - 1) * sizeof(struct Item));
+
+    for(int i = index; i < lista->tamanhoAtual - 1; i ++){
+        lista->p[i] = lista->p[i + 1];
+    }
     lista->tamanhoAtual --;
     return 0;
 }
@@ -80,6 +88,21 @@ int mostrarRelatorio(struct ListaCompras *lista){
         printf("VALOR TOTAL: %.2f\n",lista->valorTotal);
         printf("\n\n");
     }
+    return 0;
+}
+
+int liberarLista(struct ListaCompras *lista){
+    free(lista->p);
+    lista->capacidadeEstoque = 0;
+    lista->p = NULL;
+    lista->tamanhoAtual = 0;
+    lista->valorTotal = 0;
+    return 0;
+}
+
+int obtervalorTotal(struct ListaCompras *lista){
+    printf("VALOR TOTAL: %.2f\n\n",lista->valorTotal);
+    return 0;
 }
 int main(void){
     struct ListaCompras lista;
@@ -89,7 +112,9 @@ int main(void){
     mostrarRelatorio(&lista);
     removerItem(&lista,1);
     mostrarRelatorio(&lista);
-    free(lista.p);
+    obtervalorTotal(&lista);
+    liberarLista(&lista);
+
 
 
 
