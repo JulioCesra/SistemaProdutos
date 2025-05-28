@@ -13,15 +13,25 @@ struct Item{
 struct ListaCompras{
     float valorTotal;
     int capacidadeEstoque;
+    int tamanhoAtual;
     struct Item *p;
 };
 
-void inicializarLista(struct ListaCompras *lista){
-    lista->p = NULL;
-    lista->capacidadeEstoque = 0;
+int inicializarLista(struct ListaCompras *lista){
+    lista->capacidadeEstoque = 5;
     lista->valorTotal = 0.0;
+    lista->tamanhoAtual = 0;
+    lista->p = malloc(lista->capacidadeEstoque * sizeof(struct Item));
+    if(lista-> == NULL){
+        printf("ERROR NA ALOCACAO DINAMICA");
+        return 1;
+    }
+
 }
 
+void adicionarItem(struct ListaCompras *lista,char nomeP[],float valorUnitarioP, int quantidadeP){
+
+}
 int main(void){
 
 
